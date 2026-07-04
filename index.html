@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sacred Seed — Crypto Seed Phrase Security & Heirloom Seed Guides</title>
+<meta name="description" content="Protect what matters most. Guides to crypto seed phrase security, metal backup solutions, hardware wallets, heirloom seed vaults, seed starting, and companion planting.">
+<meta name="keywords" content="seed phrase security, metal seed backup, hardware wallet, heirloom seeds, seed vault, companion planting, seed starting guide, crypto backup">
+<meta property="og:title" content="Sacred Seed — Crypto Seed Phrase Security & Heirloom Seed Guides">
+<meta property="og:description" content="Protect what matters most. Guides to crypto seed phrase security, metal backup solutions, hardware wallets, heirloom seed vaults, seed starting, and companion planting.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sacredseed.io">
+<link rel="canonical" href="https://sacredseed.io">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --text: #e8e8e8;
+  --text-secondary: #aaaaaa;
+  --text-muted: #888888;
+  --accent: var(--site-accent, #2563eb);
+  --accent-light: var(--site-accent-light, #1a3a6b);
+  --accent-dark: var(--site-accent-dark, #1e40af);
+  --border: #222222;
+  --max-w: 820px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.nav-updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Hero ── */
+.hero {
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.hero-sub {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ── Sections ── */
+.section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+/* ── Intro ── */
+.section--intro {
+  padding: 3.5rem 0;
+}
+
+.intro-copy {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+/* ── Topic Cards ── */
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 1.75rem 1.5rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0 1.25rem;
+}
+
+.topic-card + .topic-card {
+  border-top: none;
+}
+
+.topic-card:hover {
+  border-color: var(--accent);
+  background: #141414;
+}
+
+.topic-number {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  line-height: 1;
+  padding-top: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-card:hover .topic-number {
+  color: var(--accent);
+}
+
+.topic-header {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.topic-icon {
+  display: none;
+}
+
+.topic-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.topic-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.topic-body {
+  grid-column: 2;
+}
+
+.topic-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.topic-points {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.topic-points li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 3px 0 3px 1.25rem;
+  position: relative;
+}
+
+.topic-points li::before {
+  content: '\2014';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.topic-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.topic-link::after {
+  content: '\2197';
+  font-size: 0.9em;
+}
+
+/* ── Guide ── */
+.guide-body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
+.guide-body h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.guide-body h3:first-child {
+  margin-top: 0;
+}
+
+.guide-body p {
+  margin-bottom: 1rem;
+}
+
+.guide-body ul,
+.guide-body ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.guide-body li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Resources ── */
+.resources-body {
+  color: var(--text-secondary);
+  line-height: 1.85;
+  font-size: 0.95rem;
+}
+
+.resources-body h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.resources-body h3:first-child {
+  margin-top: 0;
+}
+
+.resources-body p {
+  margin-bottom: 1rem;
+}
+
+.resources-body a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.resources-body a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+
+.resources-body ul,
+.resources-body ol {
+  margin: 0.5rem 0 1rem 1.25rem;
+}
+
+.resources-body li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── FAQ ── */
+.faq-list {
+  border-top: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 1.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  gap: 1rem;
+  line-height: 1.4;
+}
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.faq-q:hover::after {
+  color: var(--accent);
+}
+
+.faq-q.open::after { content: '\2212'; }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-a.open {
+  max-height: 600px;
+  padding-bottom: 1.25rem;
+}
+
+.faq-a p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ── Footer ── */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-top {
+  padding: 3rem 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.footer-disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-links-heading {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  padding: 1.25rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer-bottom p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .topic-card {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0 1rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .topic-number {
+    font-size: 1.25rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Sacred Seed</a>
+    <span class="nav-updated">Updated July 2026</span>
+  </div>
+</nav>
+<span class="logo-icon" style="display:none" aria-hidden="true">🌱</span>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">Protect the seeds that matter</h1>
+    <p class="hero-sub">Whether it's the 24 words that secure your crypto or the heirloom varieties that feed your family — seeds deserve serious protection. We cover both.</p>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="section section--intro">
+    <div class="section-inner">
+      <p class="intro-copy">Two worlds, one philosophy: protect what's irreplaceable. Your crypto seed phrase is the master key to your digital wealth — lose it and your assets are gone forever. Heirloom seeds carry generations of genetic heritage that no corporation can replicate. Sacred Seed is your guide to safeguarding both — with practical, no-nonsense advice on security, storage, and stewardship.</p>
+    </div>
+  </section>
+
+  <section class="section section--topics" id="topics">
+    <div class="section-inner">
+      <span class="section-label">Explore</span>
+      <h2 class="section-heading">Guides</h2>
+      <div class="topic-list">
+        <div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🔐</span>
+    <span class="topic-name">Seed Phrase Best Practices</span>
+    <span class="topic-tag">Crypto Security</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Your seed phrase is the master key to your entire crypto portfolio. Learn how to generate, record, store, and protect those 12 or 24 words — because one mistake means permanent, irreversible loss of your assets.</p>
+    <ul class="topic-points">
+      How BIP-39 seed phrases work,Secure generation and verification,Storage dos and don'ts,Social engineering attack prevention,Inheritance planning for seed phrases
+    </ul>
+    <a href="#affiliate-seed-phrase" class="topic-link" target="_blank" rel="noopener nofollow">Secure your seed phrase</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🔩</span>
+    <span class="topic-name">Metal Backup Solutions</span>
+    <span class="topic-tag">Crypto Security</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Paper burns, fades, and dissolves. Metal seed phrase backups are fireproof, waterproof, and corrosion-resistant. We compare the leading steel and titanium backup products — stamped, engraved, and assembled — so your recovery phrase survives anything.</p>
+    <ul class="topic-points">
+      Steel vs. titanium comparisons,Stamp kits vs. pre-cut letter tiles,Fire, water, and crush test results,Price and durability rankings,DIY vs. commercial solutions
+    </ul>
+    <a href="#affiliate-metal-backup" class="topic-link" target="_blank" rel="noopener nofollow">Compare metal backups</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🔑</span>
+    <span class="topic-name">Hardware Wallets</span>
+    <span class="topic-tag">Crypto Security</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Hardware wallets keep your private keys offline and sign transactions in a secure element that never exposes your keys to the internet. We compare Ledger, Trezor, and newer entrants on security architecture, supported coins, and usability.</p>
+    <ul class="topic-points">
+      Secure element vs. general MCU chips,Supported cryptocurrencies and chains,Open-source firmware analysis,Setup and recovery procedures,Price and feature comparison matrix
+    </ul>
+    <a href="#affiliate-hardware-wallets" class="topic-link" target="_blank" rel="noopener nofollow">Choose a hardware wallet</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🏺</span>
+    <span class="topic-name">Heirloom Seed Vault</span>
+    <span class="topic-tag">Gardening</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">An heirloom seed vault is your family's food insurance — a curated collection of open-pollinated, non-GMO seeds that can be saved and replanted year after year. Learn how to build, store, and maintain a seed vault that lasts decades.</p>
+    <ul class="topic-points">
+      Selecting varieties for your climate zone,Proper seed drying and moisture control,Long-term storage containers and methods,Germination testing and viability tracking,Rotation schedules to maintain freshness
+    </ul>
+    <a href="#affiliate-seed-vault" class="topic-link" target="_blank" rel="noopener nofollow">Build your seed vault</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🌱</span>
+    <span class="topic-name">Seed Starting Guide</span>
+    <span class="topic-tag">Gardening</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Starting seeds indoors gives you a head start on the growing season and access to varieties you'll never find at a garden center. Our guide covers timing, soil, light, temperature, and hardening off for successful transplants.</p>
+    <ul class="topic-points">
+      Indoor seed starting timeline by zone,Soil mix recipes for seed starting,Grow light recommendations and setup,Temperature and humidity management,Hardening off and transplant techniques
+    </ul>
+    <a href="#affiliate-seed-starting" class="topic-link" target="_blank" rel="noopener nofollow">Start your seeds</a>
+  </div>
+</div>
+
+<div class="topic-card">
+  <span class="topic-number"></span>
+  <div class="topic-header">
+    <span class="topic-icon">🌻</span>
+    <span class="topic-name">Companion Planting</span>
+    <span class="topic-tag">Gardening</span>
+  </div>
+  <div class="topic-body">
+    <p class="topic-desc">Companion planting is the practice of growing certain plants together for mutual benefit — pest control, pollination, nutrient sharing, and space optimization. Learn the classic combinations and the science behind why they work.</p>
+    <ul class="topic-points">
+      The Three Sisters (corn, beans, squash),Pest-repelling companion combinations,Nitrogen-fixing plants and soil health,Companion planting chart for common crops,Plants that should never be planted together
+    </ul>
+    <a href="#affiliate-companion-planting" class="topic-link" target="_blank" rel="noopener nofollow">Plan your garden</a>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--guide" id="guide">
+    <div class="section-inner">
+      <span class="section-label">Guide</span>
+      <h2 class="section-heading">The seed philosophy</h2>
+      <div class="guide-body"><h3>Seeds are sovereignty</h3><p>A crypto seed phrase gives you self-custodial control over your financial assets — no bank, no government, no intermediary. Heirloom seeds give you food sovereignty — the ability to grow, save, and share seeds without dependence on commercial seed companies. Both represent independence.</p><h3>Redundancy is resilience</h3><p>One backup isn't enough. Store your crypto seed phrase in multiple secure locations using durable materials. Keep your seed collection in multiple storage environments with proper temperature and humidity control. Single points of failure are how people lose everything.</p><h3>Knowledge is protection</h3><p>Understanding how seed phrases work (BIP-39, derivation paths) protects you from social engineering attacks. Understanding germination rates, cross-pollination, and seed viability protects your garden's genetic future. In both domains, education is your best defense.</p></div>
+    </div>
+  </section>
+
+  <section class="section section--resources" id="resources">
+    <div class="section-inner">
+      <span class="section-label">Resources</span>
+      <h2 class="section-heading">Essential resources</h2>
+      <div class="resources-body"><h3>BIP-39 Wordlist</h3><p>The official 2,048-word list used by most cryptocurrency wallets to generate seed phrases. Understanding this standard helps you verify your wallet's integrity. <a href="https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt" target="_blank" rel="noopener">View BIP-39 wordlist</a></p><h3>Seed Savers Exchange</h3><p>A nonprofit dedicated to preserving heirloom and open-pollinated seed varieties. Their collection includes thousands of rare varieties you can't find in commercial catalogs. <a href="https://www.seedsavers.org" target="_blank" rel="noopener">Visit Seed Savers Exchange</a></p><h3>Svalbard Global Seed Vault</h3><p>The world's backup seed bank, storing duplicates of seed collections from around the globe in a frozen mountain vault in Norway. A fascinating model for thinking about long-term preservation. <a href="https://www.seedvault.no" target="_blank" rel="noopener">Learn about Svalbard</a></p></div>
+    </div>
+  </section>
+
+  <section class="section section--faq" id="faq">
+    <div class="section-inner">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-heading">Frequently asked questions</h2>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-name">Sacred Seed</span>
+        <p class="footer-disclaimer">SacredSeed.io provides educational content about cryptocurrency security and gardening. This is not financial or agricultural advice. Always verify security practices independently and consult local growing guides for your region. We may earn commissions through affiliate links.</p>
+      </div>
+      <div class="footer-links">
+        <span class="footer-links-heading">More resources</span>
+        <a href="https://sepehr.ai" target="_blank" rel="noopener">sepehr.ai</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Sacred Seed. All rights reserved. Some links on this site are affiliate links. We may earn a commission if you make a purchase at no extra cost to you.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SITE_CONFIG = {"faqs":[{"q":"Why does this site cover both crypto and gardening?","a":"Both domains revolve around the same core concept: protecting seeds that are irreplaceable. Your crypto seed phrase is the single point of access to your digital wealth. Heirloom seeds carry irreplaceable genetic heritage. The preservation mindset, backup strategies, and sovereignty philosophy apply to both."},{"q":"Can I store my seed phrase digitally?","a":"We strongly recommend against it. Digital storage (photos, cloud drives, password managers) creates attack vectors — malware, cloud breaches, device theft. Write your seed phrase on paper and back it up on metal. Analog storage in secure locations is the gold standard for seed phrase security."},{"q":"How long do heirloom seeds last in storage?","a":"It varies by species. Onion and parsley seeds may only last 1-2 years. Tomato and pepper seeds can remain viable for 5-10 years. Some legume seeds last 20+ years. Proper storage (cool, dark, dry, sealed) dramatically extends viability. Test germination rates annually for critical varieties."},{"q":"What's the difference between heirloom and hybrid seeds?","a":"Heirloom seeds are open-pollinated varieties that breed true — save the seeds and you get the same plant next year. Hybrid seeds (F1) are crosses between two parent lines that produce superior first-generation plants but whose seeds won't reproduce reliably. Heirlooms give you seed sovereignty; hybrids keep you dependent on the seed company."},{"q":"Is a hardware wallet necessary if I have a metal seed backup?","a":"Yes — they serve different purposes. A hardware wallet protects your keys during active use (signing transactions). A metal seed backup protects your recovery phrase for long-term storage and disaster recovery. You need both: the wallet for daily security and the metal backup for catastrophic scenarios."}],"accentColor":"#65a30d","accentLight":"#ecfccb","accentDark":"#4d7c0f","ctaText":""};
+document.addEventListener('DOMContentLoaded', () => {
+  // Accent color
+  if (SITE_CONFIG.accentColor) {
+    document.documentElement.style.setProperty('--site-accent', SITE_CONFIG.accentColor);
+    document.documentElement.style.setProperty('--site-accent-light', SITE_CONFIG.accentLight || SITE_CONFIG.accentColor + '22');
+    document.documentElement.style.setProperty('--site-accent-dark', SITE_CONFIG.accentDark || SITE_CONFIG.accentColor);
+  }
+
+  // Number the topic cards
+  const cards = document.querySelectorAll('.topic-card');
+  cards.forEach((card, i) => {
+    const num = card.querySelector('.topic-number');
+    if (num) {
+      num.textContent = String(i + 1).padStart(2, '0');
+    }
+  });
+
+  // FAQ accordion
+  const faqList = document.getElementById('faq-list');
+  if (SITE_CONFIG.faqs && faqList) {
+    SITE_CONFIG.faqs.forEach(faq => {
+      const item = document.createElement('div');
+      item.className = 'faq-item';
+      item.innerHTML = `
+        <button class="faq-q">${faq.q}</button>
+        <div class="faq-a"><p>${faq.a}</p></div>
+      `;
+      const btn = item.querySelector('.faq-q');
+      const answer = item.querySelector('.faq-a');
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        answer.classList.toggle('open');
+      });
+      faqList.appendChild(item);
+    });
+  }
+
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.borderBottomColor = '#333';
+      } else {
+        nav.style.borderBottomColor = '';
+      }
+    }, { passive: true });
+  }
+});
+
+
+</script>
+</body>
+</html>
